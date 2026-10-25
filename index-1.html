@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omnigear | Recomendaciones de tecnología y gym en Amazon</title>
+<meta name="description" content="Selección corta de productos para tu escritorio y tu rutina de gym, con la razón de cada recomendación y enlace directo a Amazon.">
+<meta property="og:title" content="Omnigear: arma tu setup y tu rutina de gym">
+<meta property="og:description" content="Productos seleccionados para estudiar, trabajar y entrenar, con enlace a Amazon.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0b0f19">
+<style>
+:root{--bg:#0b0f19;--card:#151c2c;--tech:#6366f1;--gym:#10b981;--text:#f8fafc;--muted:#94a3b8;--border:#1e293b;--gold:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);padding:16px 16px 90px;min-height:100vh}
+body.locked{overflow:hidden}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid #a5b4fc;outline-offset:2px}
+.container{max-width:950px;margin:0 auto}
+
+.top-bar{display:flex;justify-content:space-between;align-items:center;margin:6px 0 16px}
+.logo{font-size:1.4rem;font-weight:700;background:none;border:0;cursor:pointer}
+.logo span{color:var(--tech)}
+.top-actions{display:flex;gap:8px}
+.icon-btn{background:#1e293b;border:1px solid var(--border);padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:700}
+.icon-btn:hover{background:#334155}
+.fav-count{color:var(--gold)}
+.menu-btn{font-size:1.3rem;line-height:1}
+
+.notice{font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:14px}
+
+.carousel{background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(16,185,129,.15));border:1px solid var(--tech);border-radius:14px;padding:18px;margin-bottom:22px;touch-action:pan-y}
+.slides{display:grid}
+.slide{grid-area:1/1;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;min-height:84px;visibility:hidden;opacity:0;transition:opacity .4s}
+.slide.on{visibility:visible;opacity:1}
+.slide h4{font-size:.78rem;color:#a5b4fc;margin-bottom:4px}
+.slide h3{font-size:1rem;line-height:1.4}
+.cta{background:var(--text);color:var(--bg);font-weight:700;padding:9px 16px;border-radius:8px;text-decoration:none;font-size:.85rem;white-space:nowrap}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.dot{width:8px;height:8px;border-radius:50%;border:0;background:#475569;cursor:pointer;padding:0}
+.dot.on{background:#a5b4fc}
+
+header{text-align:center;margin-bottom:20px}
+header h1{font-size:clamp(1.6rem,6vw,2.2rem);margin-bottom:8px}
+header p{color:var(--muted);font-size:.95rem}
+
+#search{width:100%;padding:12px 18px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:#fff;font-size:.95rem;margin-bottom:16px}
+#search:focus{outline:none;border-color:var(--tech)}
+
+.tabs{display:flex;gap:10px;margin-bottom:16px}
+.tab{flex:1;background:#1e293b;color:var(--muted);border:1px solid var(--border);padding:12px 8px;border-radius:30px;font-weight:700;font-size:.9rem;white-space:nowrap;cursor:pointer;transition:.2s}
+.tab.on-tech{background:var(--tech);color:#fff;border-color:var(--tech);box-shadow:0 4px 12px rgba(99,102,241,.3)}
+.tab.on-gym{background:var(--gym);color:#fff;border-color:var(--gym);box-shadow:0 4px 12px rgba(16,185,129,.3)}
+
+.subtabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px;margin-bottom:18px;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,#000 88%,transparent);mask-image:linear-gradient(to right,#000 88%,transparent)}
+.subtabs::-webkit-scrollbar{display:none}
+.sub{background:var(--card);color:var(--muted);border:1px solid var(--border);padding:7px 14px;border-radius:20px;font-size:.82rem;white-space:nowrap;cursor:pointer}
+.sub.on{background:#334155;color:#fff;border-color:#475569}
+
+.status{color:var(--muted);font-size:.85rem;margin-bottom:12px}
+.status button{background:none;border:0;color:#a5b4fc;text-decoration:underline;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 10px}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:#475569}
+.card.top{border-color:var(--gold);background:linear-gradient(145deg,#151c2c,#1f2937)}
+.card.c-tech{border-top:3px solid var(--tech)}.card.c-gym{border-top:3px solid var(--gym)}.card.top.c-tech,.card.top.c-gym{border-top-color:var(--gold)}
+.thumb{aspect-ratio:16/10;border-radius:10px;background:#0b0f19;display:flex;align-items:center;justify-content:center;font-size:2.6rem;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:contain}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.badge{padding:4px 10px;border-radius:20px;font-size:.75rem;font-weight:700}
+.b-tech{background:rgba(99,102,241,.2);color:#a5b4fc}
+.b-gym{background:rgba(16,185,129,.2);color:#6ee7b7}
+.b-top{background:rgba(245,158,11,.2);color:var(--gold)}
+.fav{background:none;border:0;font-size:1.3rem;cursor:pointer;color:var(--muted);padding:4px 8px}
+.fav.on{color:#f43f5e}
+.card h3{font-size:1.05rem}
+.card p{color:var(--muted);font-size:.88rem;line-height:1.4;flex:1}
+.btn{display:block;text-align:center;color:#fff;text-decoration:none;padding:12px;border-radius:10px;font-weight:700}
+.btn.tech{background:var(--tech)}
+.btn.gym{background:var(--gym)}
+.btn:hover{opacity:.9}
+
+.modal-wrap{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;justify-content:center;align-items:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-wrap.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;padding:22px;position:relative}
+.modal .x{position:absolute;top:12px;right:12px;background:#1e293b;border:1px solid var(--border);width:34px;height:34px;border-radius:50%;cursor:pointer}
+.modal h2{font-size:1.25rem;margin:10px 40px 10px 0}
+.modal p{color:var(--muted);font-size:.92rem;line-height:1.5;margin-bottom:14px}
+.feat{background:var(--bg);padding:12px;border-radius:10px;margin-bottom:18px;border:1px solid var(--border)}
+.feat h4{font-size:.85rem;color:#a5b4fc;margin-bottom:6px}
+.feat ul{padding-left:18px;color:var(--muted);font-size:.88rem;display:flex;flex-direction:column;gap:4px}
+
+.info{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-top:36px}
+.info h2{font-size:1.05rem;color:#a5b4fc;margin-bottom:8px}
+.info p{color:var(--muted);font-size:.88rem;line-height:1.5}
+footer{text-align:center;margin-top:30px;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border);padding:20px 10px 30px}
+
+.to-top{position:fixed;bottom:16px;right:16px;background:#1e293b;border:1px solid var(--border);width:44px;height:44px;border-radius:50%;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;z-index:99}
+.to-top.show{opacity:1;pointer-events:auto}
+
+.veil{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;backdrop-filter:blur(3px)}
+.veil.open{display:block}
+.drawer{position:fixed;top:0;right:0;width:min(300px,85vw);height:100%;background:var(--card);z-index:101;padding:22px;border-left:1px solid var(--border);overflow-y:auto;transform:translateX(100%);transition:transform .3s;visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.drawer-head h2{font-size:1.3rem}
+.d-btn{width:100%;background:#1e293b;border:1px solid var(--border);padding:12px;border-radius:8px;text-align:left;font-weight:700;cursor:pointer;margin-bottom:10px;display:flex;justify-content:space-between;gap:8px}
+.d-btn:hover{background:#334155}
+.d-btn.fav-link{color:var(--gold);justify-content:flex-start}
+.d-list{display:none;flex-direction:column;gap:4px;margin:-4px 0 12px 8px}
+.d-list.open{display:flex}
+.d-list button{background:none;border:0;color:var(--muted);text-align:left;padding:7px 8px;cursor:pointer;font-size:.9rem}
+.d-list button:hover{color:#fff}
+
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:16px;padding-bottom:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{background:rgba(99,102,241,.12);color:#c7d2fe;border:1px solid rgba(99,102,241,.45);padding:8px 14px;border-radius:20px;font-size:.85rem;font-weight:600;white-space:nowrap;cursor:pointer}
+.chip.on{background:var(--tech);color:#fff;border-color:var(--tech)}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;min-height:34px}
+.tools .status{margin:0}
+.tools select{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:.85rem}
+.acts{display:flex;align-items:center;gap:4px}
+.share{background:#1e293b;border:1px solid var(--border);color:#86efac;text-decoration:none;font-size:.75rem;font-weight:600;padding:5px 10px;border-radius:20px}
+.share:hover{background:#334155}
+.tagline{font-size:.8rem;font-weight:700;color:#a5b4fc}
+.why{color:#cbd5e1;font-size:.84rem;line-height:1.4}
+.share-btn{display:block;text-align:center;margin-top:10px;padding:10px;border:1px solid var(--border);border-radius:10px;color:#86efac;text-decoration:none;font-weight:600;font-size:.9rem}
+.flinks{margin-top:12px;display:flex;justify-content:center;gap:20px}.flinks a{color:#a5b4fc}
+.updated{font-size:.8rem;color:var(--muted);margin-top:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="top-bar">
+    <button class="logo" id="logo">Omni<span>gear</span></button>
+    <div class="top-actions">
+      <button class="icon-btn" id="favBtn" aria-label="Ver favoritos"><span class="fav-count">♥ <span id="favCount">0</span></span></button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+    </div>
+  </div>
+
+  <p class="notice">Como afiliado de Amazon, obtenemos comisión por compras elegibles, sin costo extra para ti.</p>
+
+  <div class="carousel" id="carousel" aria-live="off">
+    <div class="slides" id="slides"></div>
+    <div class="dots" id="dots"></div>
+  </div>
+
+  <header>
+    <h1>Arma tu setup y tu rutina de gym sin perder tiempo comparando</h1>
+    <p>Una selección corta de productos útiles, con la razón de cada recomendación.</p>
+    <p class="updated">Última actualización: <span id="upd"></span></p>
+  </header>
+
+  <div class="chips" id="cols" role="group" aria-label="Colecciones"></div>
+
+  <input type="search" id="search" placeholder="Buscar producto..." aria-label="Buscar producto">
+
+  <div class="tabs">
+    <button class="tab on-tech" id="tabTech">Tech y Setup</button>
+    <button class="tab" id="tabGym">Gym y Fitness</button>
+  </div>
+  <div class="subtabs" id="subtabs"></div>
+
+  <div class="tools">
+    <div class="status" id="status"></div>
+    <select id="sort" aria-label="Ordenar productos"><option value="top">Destacados primero</option><option value="az">Nombre (A–Z)</option></select>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <section class="info">
+    <h2>¿Cómo funciona la compra en Omnigear?</h2>
+    <p>Seleccionamos y recomendamos productos bien valorados. Al tocar "Ver en Amazon" irás directo a la plataforma oficial, donde pagas, gestionas tu envío y aplicas las garantías de Amazon.</p>
+  </section>
+  <section class="info">
+    <h2>¿Quién está detrás?</h2>
+    <!-- EDITA este texto con tu nombre y tu historia: es lo que más confianza genera. -->
+    <p>Omnigear es un proyecto independiente que reúne productos de tecnología y gym que nos parecen útiles. Explicamos para quién sirve cada uno y te dejamos el enlace directo a Amazon para que compares y decidas con calma. No somos una tienda: las compras, envíos y devoluciones los gestiona Amazon.</p>
+  </section>
+  <footer>* Participamos en el Programa de Afiliados de Amazon. Precios y disponibilidad pueden cambiar; confírmalos en Amazon.
+    <div class="flinks"><a href="privacidad.html">Privacidad</a><a href="contacto.html">Contacto</a></div></footer>
+</div>
+
+<button class="to-top" id="toTop" aria-label="Volver arriba">▲</button>
+
+<div class="modal-wrap" id="modalWrap">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button class="x" id="mClose" aria-label="Cerrar">✕</button>
+    <span class="badge" id="mBadge"></span>
+    <h2 id="mTitle"></h2>
+    <p id="mDesc"></p>
+    <p class="why" id="mWhy"></p>
+    <div class="feat"><h4>Características</h4><ul id="mFeat"></ul></div>
+    <a class="btn" id="mLink" target="_blank" rel="noopener noreferrer sponsored">Ver en Amazon</a>
+    <a class="share-btn" id="mShare" target="_blank" rel="noopener noreferrer">Compartir por WhatsApp</a>
+  </div>
+</div>
+
+<div class="veil" id="veil"></div>
+<aside class="drawer" id="drawer" aria-label="Menú">
+  <div class="drawer-head"><h2>Menú</h2><button class="icon-btn" id="dClose" aria-label="Cerrar menú">✕</button></div>
+  <button class="d-btn fav-link" id="dFav">Ver mis favoritos (<span id="dFavCount">0</span>)</button>
+  <div id="dCats"></div>
+</aside>
+
+<script>
+/* ====== CONFIGURA AQUÍ ====== */
+const AFFILIATE_TAG = ""; // pon tu ID, ej: "tuid-20"
+const SITE = "https://www.amazon.com";
+
+const CATS = {
+  tech: { name: "Tech & Setup", subs: { pantallas:"Pantallas", teclados:"Teclados", mouse:"Mouses", audio:"Audio", soportes:"Soportes", iluminacion:"Iluminación" } },
+  gym:  { name: "Gym & Fitness", subs: { entrenamiento:"Entrenamiento", monitoreo:"Monitoreo", hidratacion:"Hidratación", suplementos:"Suplementos", recuperacion:"Recuperación" } }
+};
+
+/* Para agregar un producto, copia una línea y cambia los datos.
+   img (opcional): URL de la foto del producto. Si no hay, se muestra el emoji. */
+const mk = cat => (sub, name, short, long, feat, q, top) => ({ id: q.toLowerCase(), cat, sub, name, short, long, feat, q, top });
+const T = mk("tech"), G = mk("gym");
+const PRODUCTS = [
+T("pantallas","Monitor Portátil 15.6\" Full HD","Conexión USB-C y HDMI. Ideal para segunda pantalla con laptop.","Conexión USB-C y HDMI. Ideal para segunda pantalla con laptop al estudiar o trabajar.",["Resolución Full HD 1080p nítida","Compatible con laptops, consolas y celulares","Diseño ultra delgado y ligero para transporte"],"Monitor Portatil 15.6 USB-C",true),
+T("pantallas","Brazo Hidráulico para Monitor","Soporte articulado VESA. Libera espacio y permite rotación 360°.","Soporte articulado VESA. Libera espacio en el escritorio y permite rotación de 360°.",["Ajuste de altura con pistón de gas","Soporta monitores de hasta 27 o 32 pulgadas","Sistema integrado para ocultar cables"],"Brazo Monitor Hidraulico VESA"),
+T("pantallas","Monitor Gamer 24\" 144Hz IPS","Panel fluido de alta tasa de refresco y respuesta de 1ms.","Panel fluido de alta tasa de refresco, tiempo de respuesta de 1ms para gaming y edición.",["Tasa de refresco de 144Hz ultra fluida","Panel IPS con colores vivos y ángulos amplios","Tecnología FreeSync para evitar tirones"],"Monitor Gamer 144Hz 24"),
+T("pantallas","Filtro de Luz Azul para Monitor","Panel acrílico colgante que reduce la fatiga visual.","Panel acrílico colgante que reduce la fatiga visual y protege la pantalla contra rayones.",["Bloquea luz azul y reflejos","Fácil instalación sin adhesivos","Material acrílico de alta transparencia"],"Filtro Luz Azul Monitor"),
+T("pantallas","Adaptador Hub USB-C a HDMI 4K","Conecta laptop o celular a pantallas externas en 4K.","Permite conectar tu laptop o celular a pantallas externas con resolución nítida 4K a 60Hz.",["Salida de video 4K Ultra HD","Puertos USB 3.0 adicionales y carga PD","Carcasa de aluminio duradera y disipadora"],"Hub USB-C a HDMI 4K"),
+T("teclados","Teclado Mecánico RGB Redragon 60%","Switches rojos silenciosos, formato compacto ideal.","Switches rojos silenciosos, formato compacto ideal para ahorrar espacio en el escritorio.",["Diseño compacto 60% sin teclado numérico","Switches mecánicos de gran durabilidad","Iluminación RGB personalizable"],"Teclado Mecanico RGB Redragon"),
+T("teclados","Teclado Mecánico Inalámbrico Keychron","Conexión multidispositivo por Bluetooth o cable.","Conexión multidispositivo por Bluetooth o cable. Batería de larga duración y gran tacto.",["Bluetooth y cableado USB-C","Compatible con Windows, Mac, iOS y Android","Switches intercambiables (hot-swappable)"],"Teclado Mecanico Keychron"),
+T("teclados","Teclado Ergonómico Silencioso","Teclas de perfil bajo tipo portátil para redacción.","Teclas de perfil bajo tipo portátil, ideal para redacción rápida y trabajo nocturno sin ruido.",["Membrana ultra silenciosa","Diseño estilizado con reposamuñecas integrado","Teclas multimedia de acceso rápido"],"Teclado Membrana Silencioso"),
+T("teclados","Mini Teclado Inalámbrico con Touchpad","Control portátil recargable con panel táctil integrado.","Control portátil recargable con panel táctil integrado para Smart TV, PC o consolas.",["Panel táctil con gestos","Batería recargable de larga duración","Receptor USB Plug and Play"],"Mini Teclado Inalambrico Touchpad"),
+T("mouse","Mouse Ergonómico Inalámbrico","Diseño para reducir la fatiga en la muñeca.","Diseño ergonómico para reducir la fatiga en la muñeca y batería de larga duración.",["Sensor de alta precisión en cualquier superficie","Rueda electromagnética MagSpeed","Batería recargable de hasta 70 días"],"Mouse Ergonomico Inalambrico Logitech"),
+T("mouse","Alfombrilla / Mousepad XL Extendido","Superficie de tela de baja fricción y base antideslizante.","Superficie de tela de baja fricción con base de goma antideslizante para teclado y mouse.",["Tamaño amplio para teclado y mouse","Costuras reforzadas anti-desgaste","Base de goma natural adherente"],"Mousepad Extendido XL"),
+T("mouse","Mouse Gamer Ultraligero RGB","Diseño panal de abeja y sensor óptico de alta precisión.","Diseño tipo panal de abeja, sensor óptico de alta precisión y cable flexible antitirones.",["Ultraligero, reduce el cansancio","Sensor óptico con DPI ajustable","Iluminación RGB"],"Mouse Gamer Ultraligero RGB"),
+T("mouse","Mouse Vertical Ergonómico","Posición natural que cuida la muñeca en jornadas largas.","Posición natural de la mano para trabajar horas con más comodidad.",["Ángulo de 57 grados para la muñeca","Conexión dual (Bluetooth y USB)","Batería recargable por USB-C"],"Mouse Vertical Ergonomico"),
+T("mouse","Set Reposamuñecas de Memory Foam","Almohadillas ergonómicas con espuma viscoelástica.","Almohadillas ergonómicas con espuma viscoelástica para soporte cómodo de manos.",["Espuma viscoelástica de alta densidad","Base antideslizante","Textura suave y transpirable"],"Reposamuñecas Memory Foam"),
+T("audio","Audífonos Diadema con Micrófono","Aislamiento pasivo de ruido y sonido nítido.","Aislamiento pasivo de ruido y sonido nítido para clases virtuales y largas jornadas.",["Almohadillas acolchadas ultrasuaves","Micrófono flexible con cancelación de ruido","Sonido estéreo envolvente"],"Audifonos Diadema Gamer Microfono"),
+T("audio","Micrófono Condensador USB para Streaming","Captura de audio profesional con control directo.","Captura de audio con control directo, ideal para videollamadas y streams.",["Patrón cardioide que aísla tu voz","Control de volumen y silencio rápido","Soporte de escritorio ajustable incluido"],"Microfono Condensador USB Streaming"),
+T("audio","Barra de Sonido RGB para PC","Bocina estéreo compacta con luces LED y Bluetooth.","Compacta bocina estéreo para escritorio con luces LED y conexión auxiliar o Bluetooth.",["Cabe debajo del monitor","Luces LED RGB dinámicas","Bluetooth y auxiliar 3.5mm"],"Barra de Sonido RGB PC"),
+T("audio","Audífonos Inalámbricos ANC","Cancelación activa de ruido y graves profundos.","Cancelación activa de ruido y graves profundos para concentrarte al estudiar.",["Cancelación activa de ruido (ANC)","Larga duración con carga rápida","Plegables, almohadillas memory foam"],"Audifonos Inalambricos Cancelacion Ruido"),
+T("audio","Soporte Organizador para Audífonos","Base elegante para mantener tus diademas seguras.","Base elegante para mantener tus diademas seguras y ordenadas en el setup.",["Estructura resistente y estable","Diseño moderno con luz ambiental","Cuida las almohadillas"],"Soporte para Audifonos Escritorio"),
+T("soportes","Soporte Ventilado de Aluminio","Estructura ajustable para mejorar postura y refrigeración.","Estructura ajustable en altura para mejorar la postura y mantener la laptop fresca.",["Ergonómico, ayuda con el cuello","Aluminio ligero que disipa calor","Plegable y fácil de llevar"],"Soporte Laptop Aluminio"),
+T("soportes","Soporte Plegable de Escritorio para Celular","Base de aluminio ajustable en ángulo para videollamadas.","Base de aluminio ajustable en ángulo para videollamadas y notificaciones visibles.",["Ángulo totalmente ajustable","Goma antideslizante","Compatible con smartphones y tablets pequeñas"],"Soporte Celular Escritorio Aluminio"),
+T("soportes","Clips Organizadores de Cables","Soportes adhesivos de silicona sin enredos.","Set de soportes adhesivos de silicona para mantener los cables en su lugar sin enredos.",["Silicona flexible y durable","Adhesivo fuerte que no daña muebles","Cargadores siempre al alcance"],"Organizador de Cables Escritorio"),
+T("soportes","Bandeja Oculta de Gestión de Cables","Estructura metálica para ordenar multicontactos abajo.","Estructura metálica para ordenar multicontactos y cables por debajo del escritorio.",["Gran capacidad para regletas","Instalación fácil","Acero anti-corrosión"],"Bandeja Gestion Cables Escritorio"),
+T("soportes","Brazo Articulado para Tablet","Soporte flexible de pinza para mesas o camas.","Soporte flexible de pinza para tablets o celulares en mesas, escritorios o camas.",["Cuello de ganso flexible","Rotación de 360 grados","Mordaza firme y segura"],"Soporte Tablet Articulado Escritorio"),
+T("iluminacion","Barra de Luz LED para Monitor","Ilumina el área de trabajo sin reflejos en pantalla.","Ilumina el área de trabajo sin generar reflejos en la pantalla. Ayuda a reducir la vista cansada.",["Diseño óptico asimétrico sin reflejos","Color y brillo ajustables","Alimentación por USB"],"Barra Luz LED Monitor"),
+T("iluminacion","Tira LED RGB Inteligente USB","Iluminación ambiental trasera compatible con app.","Iluminación ambiental trasera para escritorio o monitor, con app y control remoto.",["Sincronización con música","App móvil o control remoto","Adhesivo de alta resistencia"],"Tira LED RGB Inteligente USB"),
+T("iluminacion","Lámpara de Escritorio LED Recargable","Luz regulable con temperatura de color y batería interna.","Luz regulable con distintos niveles de temperatura de color y batería interna para apagones.",["Batería recargable de gran autonomía","Panel táctil para regular intensidad","Plegable, ahorra espacio"],"Lampara Escritorio LED Recargable"),
+T("iluminacion","Aro de Luz LED con Trípode","Iluminación frontal uniforme con soporte para celular.","Iluminación frontal uniforme con soporte para celular, ideal para grabaciones y clases.",["Trípode ajustable incluido","Soporte flexible para teléfono","Luz cálida, fría y neutra"],"Aro de Luz LED con Tripie"),
+T("iluminacion","Foco LED Inteligente Multicolor","Bombilla regulable controlada por voz o app móvil.","Bombilla regulable controlada por voz o aplicación móvil para crear ambientes de estudio.",["Compatible con Alexa y Google Assistant","Millones de colores y blancos ajustables","Bajo consumo de energía"],"Foco LED Inteligente Wifi"),
+G("entrenamiento","Rueda Abdominal con Soporte","Diseño estable con rebote automático y apoyabrazos.","Diseño estable con rebote automático y apoyabrazos para cuidar la zona lumbar.",["Rebote automático asistido","Soporte acolchado para codos y antebrazos","Base ancha antideslizante"],"Ab Roller Wheel Knee Pad",true),
+G("entrenamiento","Straps de Agarre para Pesas","Correas acolchadas para mejorar el agarre en jalones.","Correas acolchadas para mejorar el agarre en jalones, peso muerto y remo pesado.",["Neopreno acolchado","Costuras reforzadas","Menos fatiga de antebrazo"],"Straps Gimnasio Levantamiento"),
+G("entrenamiento","Kit de Bandas de Resistencia Elásticas","Set de 5 niveles de tensión ideal para calistenia.","Set de 5 niveles de tensión para estiramientos, calistenia y ejercicio en casa.",["Látex natural de alta elasticidad","Incluye anclaje para puerta y manijas","Niveles codificados por color"],"Bandas de Resistencia Elasticas"),
+G("entrenamiento","Cinturón Lumbar para Levantamiento","Soporte firme para proteger la espalda baja.","Soporte firme de alta resistencia para proteger la espalda baja en ejercicios pesados.",["Estabilidad para la columna","Hebilla de ajuste rápido","Diseño ergonómico"],"Cinturon Levantamiento Pesas Gym"),
+G("entrenamiento","Muñequeras Deportivas de Soporte","Vendas elásticas ajustables ideales para press de banca.","Vendas elásticas ajustables con ojal para pulgar, ideales para press de banca y fuerza.",["Soporte ajustable con velcro","Ojal cómodo para el pulgar","Ayuda en entrenamientos pesados"],"Muñequeras Elasticas Soporte Gym"),
+G("monitoreo","Pulsera Inteligente Xiaomi Smart Band","Seguimiento continuo de ritmo cardíaco y sueño.","Seguimiento continuo de ritmo cardíaco, fases de sueño, SpO2 y entrenamientos.",["Pantalla AMOLED brillante","Batería de hasta 14 días","Resistente al agua"],"Xiaomi Smart Band"),
+G("monitoreo","Smartwatch Deportivo con GPS","Reloj inteligente resistente con GPS integrado.","Reloj inteligente resistente al agua con modos multideporte y métricas de salud.",["GPS integrado","Métricas de recuperación y carga","Notificaciones de llamadas y apps"],"Smartwatch Deportivo con GPS"),
+G("monitoreo","Báscula Digital Inteligente de Baño","Mide grasa corporal y masa muscular.","Mide porcentaje de grasa corporal, masa muscular, agua y peso mediante bioimpedancia.",["Análisis de composición corporal","Bluetooth con app móvil","Vidrio templado resistente"],"Bascula Inteligente Grasa Corporal"),
+G("monitoreo","Banda de Frecuencia Cardíaca para Pecho","Sensor de alta precisión con Bluetooth y ANT+.","Sensor de ritmo cardíaco de alta precisión con Bluetooth y ANT+ para entrenar.",["Alta precisión","Conectividad Bluetooth y ANT+","Correa de tela lavable"],"Banda Frecuencia Cardiaca Pecho"),
+G("monitoreo","Cronómetro Deportivo Digital","Dispositivo portátil para medir tiempos de descanso.","Dispositivo portátil resistente al agua para medir tiempos de descanso en tus rutinas.",["Tiempos fraccionados y totales","Pantalla de fácil lectura","Cordón incluido"],"Cronometro Deportivo Digital"),
+G("hidratacion","Termo Térmico de Acero Inoxidable","Mantiene el agua fría por muchas horas.","Mantiene el agua fría por muchas horas. Libre de BPA, resistente y antigoteo.",["Doble pared con aislamiento al vacío","Acero inoxidable 18/8 grado alimenticio","Tapa antigoteo"],"Termo Acero Inoxidable Deportivo"),
+G("hidratacion","Shaker / Vaso Mezclador de Proteína","Botella batidora con rejilla para eliminar grumos.","Botella batidora con rejilla mezcladora para eliminar grumos en suplementos y malteadas.",["Mezcla sin grumos","Capacidad para batidos grandes","Libre de BPA, apto para lavavajillas"],"Shaker Vaso Mezclador Proteina"),
+G("hidratacion","Galón Botella de Agua Motivacional 2L","Bidón con marcas de tiempo y frases motivacionales.","Bidón con marcas de tiempo y frases para ayudarte a tomar agua todo el día.",["2 litros de capacidad","Marcas de tiempo impresas","Asa ergonómica y boquilla con sorbete"],"Galon Botella Agua Motivacional"),
+G("hidratacion","Tabletas de Electrolitos Hidratantes","Efervescentes para reponer sales minerales.","Tabletas efervescentes de electrolitos para reponer sales minerales perdidas en el sudor.",["Sin azúcar","Aporte de sodio, potasio y magnesio","Se disuelven fácil en agua fría"],"Tabletas Electrolitos Hidratacion"),
+G("hidratacion","Mochila Deportiva Impermeable para Gym","Bolso espacioso con compartimento para calzado.","Bolso espacioso con compartimento para calzado y ropa húmeda post-entrenamiento.",["Compartimento ventilado para zapatos","Tejido impermeable","Varios bolsillos organizadores"],"Mochila Deportiva Impermeable Gym"),
+G("suplementos","Creatina Monohidratada 100% Pura","Para fuerza y rendimiento muscular.","Suplemento popular para fuerza, potencia y rendimiento. Consulta a un profesional de salud antes de usar suplementos.",["100% creatina monohidratada","Polvo micronizado","Sin sabor, mezcla con agua o jugo"],"Creatina Monohidratada Pura"),
+G("suplementos","Proteína Whey Concentrada / Aislada","Para recuperación y masa muscular.","Suplemento para complementar tu alimentación y apoyar la recuperación. Consulta a un profesional de salud.",["Alto contenido de proteína por porción","Aminoácidos esenciales","Gran variedad de sabores"],"Proteina Whey Suero de Leche"),
+G("suplementos","Pre-Entreno (Pre-Workout) Energético","Fórmula con cafeína y aminoácidos para energía y enfoque.","Fórmula con cafeína y aminoácidos para energía y enfoque al entrenar. Contiene estimulantes: consulta a un profesional de salud.",["Energía y concentración","Incluye beta-alanina y citrulina","Revisa la etiqueta de cafeína"],"Pre-Entreno Pre-Workout Energia"),
+G("suplementos","Aminoácidos BCAA en Polvo","Apoyan la recuperación durante el entreno.","Aminoácidos ramificados en polvo para consumir durante el entrenamiento.",["Aminoácidos ramificados","Favorecen la síntesis proteica","Sabor refrescante"],"Aminoacidos BCAA en Polvo"),
+G("suplementos","Pastillero Organizador Portátil","Estuche compacto hermético para cápsulas y vitaminas.","Estuche compacto hermético para llevar cápsulas, vitaminas y creatina a todos lados.",["Compartimentos independientes","Libre de BPA, resistente a caídas","Tamaño de bolsillo"],"Pastillero Organizador Suplementos"),
+G("recuperacion","Pistola de Masaje Muscular","Recuperación con 6 cabezales intercambiables.","Ayuda a la recuperación y a relajar nudos musculares post-entrenamiento con 6 cabezales.",["Motor silencioso","6 cabezales intercambiables","Velocidades ajustables"],"Pistola de Masaje Muscular"),
+G("recuperacion","Foam Roller / Rodillo de Espuma","Ideal para liberación miofascial y estiramientos.","Ideal para liberación miofascial, estiramientos de espalda y alivio de piernas cansadas.",["Textura de puntos de presión","Espuma de alta densidad","Ayuda a la flexibilidad"],"Foam Roller Rodillo Espuma"),
+G("recuperacion","Pelota de Masaje para Puntos Gatillo","Esfera de goma densa para contracturas profundas.","Esfera de goma densa para tratar contracturas en plantas de pies, espalda y hombros.",["Goma sólida de alta densidad","Útil para nudos y molestias en la planta del pie","Portátil"],"Pelota de Masaje Puntos Gatillo"),
+G("recuperacion","Compresa de Gel Reutilizable Frío / Calor","Terapia térmica para golpes y dolores musculares.","Alivia molestias por golpes o dolores musculares mediante terapia de frío o calor.",["Apta para microondas y congelador","Gel flexible","Reutilizable"],"Compresa de Gel Frio Calor"),
+G("recuperacion","Medias de Compresión Deportiva","Ayudan a reducir la fatiga en las piernas.","Compresión graduada para apoyar la circulación y reducir la sensación de fatiga tras entrenar.",["Compresión graduada","Tejido transpirable","Para recuperación y carreras"],"Medias de Compresion Deportiva")
+];
+
+/* Etiqueta y razón de cada recomendación (edítalas con tu criterio real).
+   La clave es el texto de búsqueda "q" en minúsculas. */
+const EXTRA = {
+ "monitor portatil 15.6 usb-c":["Para trabajar en cualquier lado","Ideal si usas laptop y necesitas una segunda pantalla."],
+ "brazo monitor hidraulico vesa":["Libera tu escritorio","Útil si tu escritorio es pequeño o quieres mejor postura."],
+ "teclado mecanico rgb redragon":["Para empezar en mecánicos","Una forma de probar un teclado mecánico sin gastar de más."],
+ "teclado mecanico keychron":["Opción premium","Para quien escribe mucho y quiere conectar varios dispositivos."],
+ "mouse vertical ergonomico":["Cuida tu muñeca","Pensado para quien pasa horas frente al computador."],
+ "audifonos inalambricos cancelacion ruido":["Para concentrarte","Ideal si estudias o trabajas en lugares con ruido."],
+ "microfono condensador usb streaming":["Para llamadas y contenido","Mejora el audio si das clases, haces llamadas o grabas."],
+ "soporte laptop aluminio":["Mejor postura","Sube la pantalla para no mirar tanto hacia abajo."],
+ "organizador de cables escritorio":["Barato y útil","Un cambio pequeño que ordena todo el escritorio."],
+ "barra luz led monitor":["Para estudiar de noche","Ilumina tu espacio sin reflejos en la pantalla."],
+ "ab roller wheel knee pad":["Para empezar en casa","Trabaja el abdomen con muy poco espacio."],
+ "bandas de resistencia elasticas":["Para empezar barato","Sirven para fuerza y movilidad sin equipo pesado."],
+ "xiaomi smart band":["Para medir tu actividad","Registra pasos, sueño y entrenamientos sin gastar mucho."],
+ "pistola de masaje muscular":["Para después de entrenar","Útil si sientes tensión tras la rutina."],
+ "foam roller rodillo espuma":["Recuperación básica","Para estirar y soltar espalda y piernas."],
+ "shaker vaso mezclador proteina":["Básico del gym","Para batidos sin grumos."]
+};
+const COLLECTIONS = [
+ {name:"Setup de estudio",ids:["monitor portatil 15.6 usb-c","soporte laptop aluminio","audifonos inalambricos cancelacion ruido","barra luz led monitor","organizador de cables escritorio","teclado mecanico rgb redragon"]},
+ {name:"Gym en casa",ids:["ab roller wheel knee pad","bandas de resistencia elasticas","straps gimnasio levantamiento","shaker vaso mezclador proteina","termo acero inoxidable deportivo","foam roller rodillo espuma"]},
+ {name:"Cuida tu postura",ids:["brazo monitor hidraulico vesa","soporte laptop aluminio","mouse vertical ergonomico","reposamuñecas memory foam","foam roller rodillo espuma"]},
+ {name:"Recuperación",ids:["pistola de masaje muscular","foam roller rodillo espuma","pelota de masaje puntos gatillo","compresa de gel frio calor","medias de compresion deportiva"]}
+];
+const UPDATED = "octubre de 2026";
+
+const SLIDES = [
+ {label:"Tech destacado",title:'Monitor Portátil 15.6" Full HD',q:"Monitor Portatil 15.6 USB-C"},
+ {label:"Gym destacado",title:"Rueda Abdominal con Soporte para Rodillas",q:"Ab Roller Wheel Knee Pad"}
+];
+/* ============================ */
+
+const $ = id => document.getElementById(id);
+const link = q => `${SITE}/s?k=${encodeURIComponent(q)}${AFFILIATE_TAG ? "&tag=" + encodeURIComponent(AFFILIATE_TAG) : ""}`;
+const state = { cat:"tech", sub:"all", query:"", favOnly:false, col:null, sort:"top" };
+let favs = [];
+try { favs = JSON.parse(localStorage.getItem("ftl-favs") || "[]"); } catch(e) {}
+const saveFavs = () => { try { localStorage.setItem("ftl-favs", JSON.stringify(favs)); } catch(e) {} };
+const norm = s => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+
+/* Utilidades */
+const shareUrl = p => "https://wa.me/?text=" + encodeURIComponent(p.name + " — míralo en Amazon: " + link(p.q));
+const track = n => { try { if (window.plausible) window.plausible("Clic Amazon", { props: { producto: n } }); } catch (e) {} };
+function sortList(l) {
+  const a = l.slice();
+  if (state.sort === "az") return a.sort((x, y) => x.name.localeCompare(y.name, "es"));
+  return a.sort((x, y) => (y.top ? 1 : 0) - (x.top ? 1 : 0));
+}
+function buildCols() {
+  const box = $("cols"); box.textContent = "";
+  COLLECTIONS.forEach((c, i) => {
+    const b = el("button", "chip" + (state.col === i && !state.favOnly ? " on" : ""), c.name);
+    b.onclick = () => { state.col = state.col === i ? null : i; state.favOnly = false; state.query = ""; $("search").value = ""; render(); $("status").scrollIntoView({ behavior: "smooth", block: "center" }); };
+    box.appendChild(b);
+  });
+}
+function injectSchema() {
+  try {
+    const sc = document.createElement("script"); sc.type = "application/ld+json";
+    sc.textContent = JSON.stringify({ "@context": "https://schema.org", "@type": "ItemList", name: "Catálogo Omnigear", itemListElement: PRODUCTS.map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.name, url: link(p.q) })) });
+    document.head.appendChild(sc);
+  } catch (e) {}
+}
+
+/* Render */
+function render() {
+  const q = norm(state.query.trim());
+  const searching = q.length > 0;
+  let list = PRODUCTS.filter(p => {
+    if (state.favOnly) return favs.includes(p.id);
+    if (state.col !== null) return COLLECTIONS[state.col].ids.includes(p.id);
+    if (!searching && p.cat !== state.cat) return false;
+    if (!searching && state.sub !== "all" && p.sub !== state.sub) return false;
+    return !searching || norm(p.name + " " + p.short + " " + CATS[p.cat].subs[p.sub]).includes(q);
+  });
+  list = sortList(list);
+  buildCols();
+  const grid = $("grid"); grid.textContent = "";
+  list.forEach(p => grid.appendChild(card(p)));
+  if (!list.length) grid.appendChild(el("div", "empty", state.favOnly ? "Aún no tienes favoritos. Toca ♥ en un producto para guardarlo." : "No encontramos productos con esa búsqueda."));
+  const st = $("status"); st.textContent = "";
+  if (state.col !== null && !state.favOnly) { st.append("Colección: " + COLLECTIONS[state.col].name + " · "); const b = el("button", "", "Ver todo"); b.onclick = () => { state.col = null; render(); }; st.appendChild(b); }
+  else if (state.favOnly) { st.append("Mostrando tus favoritos · "); const b = el("button", "", "Ver todo"); b.onclick = () => { state.favOnly = false; render(); }; st.appendChild(b); }
+  else if (searching) st.textContent = `${list.length} resultado(s) en todo el catálogo`;
+  $("favCount").textContent = $("dFavCount").textContent = favs.length;
+}
+
+function card(p) {
+  const c = el("div", "card c-" + p.cat + (p.top ? " top" : ""));
+  c.tabIndex = 0; c.setAttribute("role", "button"); c.setAttribute("aria-label", "Ver detalles de " + p.name);
+  const th = el("div", "thumb");
+  if (p.img) { const i = el("img"); i.src = p.img; i.alt = p.name; i.loading = "lazy"; i.onerror = () => th.remove(); th.appendChild(i); }
+  const row = el("div", "row");
+  row.appendChild(p.top ? el("span", "badge b-top", "Destacado") : el("span", "badge b-" + p.cat, CATS[p.cat].subs[p.sub]));
+  const f = el("button", "fav" + (favs.includes(p.id) ? " on" : ""), favs.includes(p.id) ? "♥" : "♡");
+  f.setAttribute("aria-label", "Guardar en favoritos"); f.setAttribute("aria-pressed", favs.includes(p.id));
+  f.onclick = e => { e.stopPropagation(); toggleFav(p.id); };
+  const acts = el("div", "acts"), sh = el("a", "share", "Compartir");
+  sh.href = shareUrl(p); sh.target = "_blank"; sh.rel = "noopener noreferrer"; sh.setAttribute("aria-label", "Compartir " + p.name + " por WhatsApp"); sh.onclick = e => e.stopPropagation();
+  acts.append(sh, f); row.appendChild(acts);
+  const a = el("a", "btn " + p.cat, "Ver en Amazon");
+  a.href = link(p.q); a.target = "_blank"; a.rel = "noopener noreferrer sponsored"; a.onclick = e => { e.stopPropagation(); track(p.name); };
+  const ex = EXTRA[p.id];
+  if (p.img) c.appendChild(th);
+  c.appendChild(row);
+  if (ex) c.appendChild(el("div", "tagline", ex[0]));
+  c.append(el("h3", "", p.name), el("p", "", p.short));
+  if (ex) c.appendChild(el("div", "why", ex[1]));
+  c.appendChild(a);
+  const open = () => openModal(p);
+  c.onclick = open; c.onkeydown = e => { if (e.target === c && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); open(); } };
+  return c;
+}
+
+function toggleFav(id) {
+  favs = favs.includes(id) ? favs.filter(x => x !== id) : [...favs, id];
+  saveFavs(); render();
+}
+
+/* Pestañas */
+function buildSubs() {
+  const box = $("subtabs"); box.textContent = ""; box.scrollLeft = 0;
+  const add = (key, label) => { const b = el("button", "sub" + (state.sub === key ? " on" : ""), label); b.onclick = () => { state.sub = key; state.favOnly = false; state.col = null; buildSubs(); render(); }; box.appendChild(b); };
+  add("all", "Todos");
+  Object.entries(CATS[state.cat].subs).forEach(([k, v]) => add(k, v));
+}
+function setCat(cat, sub = "all") {
+  state.cat = cat; state.sub = sub; state.favOnly = false; state.col = null; state.query = ""; $("search").value = "";
+  $("tabTech").className = "tab" + (cat === "tech" ? " on-tech" : "");
+  $("tabGym").className = "tab" + (cat === "gym" ? " on-gym" : "");
+  buildSubs(); render();
+}
+$("tabTech").onclick = () => setCat("tech");
+$("tabGym").onclick = () => setCat("gym");
+$("logo").onclick = () => { setCat("tech"); window.scrollTo({ top: 0 }); };
+$("search").oninput = e => { state.query = e.target.value; state.favOnly = false; state.col = null; render(); };
+$("favBtn").onclick = () => { state.favOnly = true; render(); $("status").scrollIntoView({ behavior: "smooth", block: "center" }); };
+
+/* Modal */
+let lastFocus = null;
+function openModal(p) {
+  lastFocus = document.activeElement;
+  $("mBadge").className = "badge b-" + p.cat; $("mBadge").textContent = CATS[p.cat].subs[p.sub];
+  $("mTitle").textContent = p.name; $("mDesc").textContent = p.long;
+  const ex = EXTRA[p.id]; $("mWhy").textContent = ex ? ex[1] : ""; $("mWhy").style.display = ex ? "" : "none";
+  $("mShare").href = shareUrl(p);
+  const ul = $("mFeat"); ul.textContent = ""; p.feat.forEach(t => ul.appendChild(el("li", "", t)));
+  const a = $("mLink"); a.href = link(p.q); a.className = "btn " + p.cat; a.onclick = () => track(p.name);
+  $("modalWrap").classList.add("open"); document.body.classList.add("locked"); $("mClose").focus();
+}
+function closeModal() { $("modalWrap").classList.remove("open"); document.body.classList.remove("locked"); if (lastFocus) lastFocus.focus(); }
+$("mClose").onclick = closeModal;
+$("modalWrap").onclick = e => { if (e.target === $("modalWrap")) closeModal(); };
+
+/* Menú lateral */
+function buildDrawer() {
+  const box = $("dCats");
+  Object.entries(CATS).forEach(([key, c]) => {
+    const b = el("button", "d-btn", c.name); b.appendChild(el("span", "", "▾"));
+    const l = el("div", "d-list");
+    const go = (sub, label) => { const x = el("button", "", label); x.onclick = () => { closeMenu(); setCat(key, sub); window.scrollTo({ top: $("subtabs").offsetTop - 80, behavior: "smooth" }); }; l.appendChild(x); };
+    go("all", "Todos"); Object.entries(c.subs).forEach(([k, v]) => go(k, v));
+    b.onclick = () => l.classList.toggle("open");
+    box.append(b, l);
+  });
+}
+function openMenu() { $("drawer").classList.add("open"); $("veil").classList.add("open"); document.body.classList.add("locked"); }
+function closeMenu() { $("drawer").classList.remove("open"); $("veil").classList.remove("open"); document.body.classList.remove("locked"); }
+$("menuBtn").onclick = openMenu; $("dClose").onclick = closeMenu; $("veil").onclick = closeMenu;
+$("dFav").onclick = () => { closeMenu(); state.favOnly = true; render(); window.scrollTo({ top: $("subtabs").offsetTop - 80, behavior: "smooth" }); };
+
+document.addEventListener("keydown", e => { if (e.key === "Escape") { closeModal(); closeMenu(); } });
+
+/* Carrusel */
+let cur = 0, timer;
+/* Todas las ofertas se apilan en la misma celda: la altura es la de la más alta y no salta al cambiar */
+SLIDES.forEach(s => {
+  const d = el("div", "slide"), t = el("div"), a = el("a", "cta", "Ver en Amazon");
+  t.append(el("h4", "", s.label), el("h3", "", s.title));
+  a.href = link(s.q); a.target = "_blank"; a.rel = "noopener noreferrer sponsored";
+  d.append(t, a); $("slides").appendChild(d);
+});
+function showSlide(i) {
+  cur = (i + SLIDES.length) % SLIDES.length;
+  [...$("slides").children].forEach((d, n) => { d.classList.toggle("on", n === cur); d.setAttribute("aria-hidden", n !== cur); });
+  [...$("dots").children].forEach((d, n) => d.classList.toggle("on", n === cur));
+}
+function startTimer() { clearInterval(timer); timer = setInterval(() => showSlide(cur + 1), 6000); }
+SLIDES.forEach((_, i) => { const d = el("button", "dot"); d.setAttribute("aria-label", "Ir a la oferta " + (i + 1)); d.onclick = () => { showSlide(i); startTimer(); }; $("dots").appendChild(d); });
+let x0 = null;
+$("carousel").addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+$("carousel").addEventListener("touchend", e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) { showSlide(cur + (dx < 0 ? 1 : -1)); startTimer(); } x0 = null; });
+
+/* Botón subir */
+window.addEventListener("scroll", () => $("toTop").classList.toggle("show", window.scrollY > 400), { passive: true });
+$("toTop").onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+$("upd").textContent = UPDATED;
+$("sort").onchange = e => { state.sort = e.target.value; render(); };
+injectSchema();
+buildDrawer(); buildSubs(); showSlide(0); startTimer(); render();
+</script>
+</body>
+</html>
